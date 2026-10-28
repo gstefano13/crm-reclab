@@ -2,7 +2,8 @@
 create schema if not exists crm_priv;
 revoke all on schema crm_priv from public, anon, authenticated;
 create table if not exists crm_priv.config (id int primary key default 1, senha_hash text not null);
-insert into crm_priv.config (id, senha_hash) values (1, encode(sha256(convert_to('vendasrec','UTF8')),'hex'))
+-- Antes de rodar: troque TROQUE_A_SENHA pela senha da equipe (nunca suba a senha real para o GitHub)
+insert into crm_priv.config (id, senha_hash) values (1, encode(sha256(convert_to('TROQUE_A_SENHA','UTF8')),'hex'))
 on conflict (id) do update set senha_hash = excluded.senha_hash;
 
 create or replace function public.crm_team_ok() returns boolean
